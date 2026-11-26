@@ -133,17 +133,32 @@ import { useState } from "react";
    }
 
    const totalDivs = [0, 3, 6]
+
+
    
    return (
      <>
 
         <div>{estado}</div>
         <div className="board-row">
-          {totalDivs.map((d, index) => (cadrados.slice(totalDivs[index], (totalDivs[index + 1] -1))).map((c, i)=> <Cadrado valor={c} onCadradoClick={() => handleClick(cadrados[(index+1)*i])}></Cadrado>))}
-         
+ 
          {/* <Cadrado valor={cadrados[0]} onCadradoClick={() => handleClick(0)}/>
          <Cadrado valor={cadrados[1]  }onCadradoClick={() => handleClick(1)}/>
          <Cadrado valor={cadrados[2] }onCadradoClick={() => handleClick(2)}/> */}
+
+
+         {totalDivs.map((d, i)=> <div key={i} className="board-row"> 
+          {i == 2 } ? 
+
+          {cadrados.slice(totalDivs[i], totalDivs[index]).map((c, j) => <Cadrado valor={cadrados[(totalDivs[i])+j]} onCadradoClick={() => handleClick()}/>)}
+          :
+          {cadrados.slice(totalDivs[i], totalDivs[index + 1]).map((c, j) => <Cadrado valor={cadrados[(totalDivs[i])+j]} onCadradoClick={() => handleClick()}/>)}
+            
+            
+            
+          </div> )}
+         
+
        </div>
        <div className="board-row">
          <Cadrado valor={cadrados[3]}onCadradoClick={() => handleClick(3)} />
