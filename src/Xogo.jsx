@@ -8,8 +8,7 @@ export default function Xogo(){
     const [movementoActual, setMovementoActual] = useState(0);
     const xTurno = movementoActual % 2 === 0;
     const cadradosActuais= historial[movementoActual];
-    
-
+    const [movementos, setMovementos] = useState([Array(9).fill(null)])
 
     function handleXogo(novosCadrados){
 
@@ -27,8 +26,20 @@ export default function Xogo(){
       
     }
 
-    // const movementos = historial.map((m, i) => <button> {i == 0 && "Ir al inicio del juego"} {i != 0 && "Ir al movimiento #" + i} </button> 
-    const movementos = historial.map((cadrados, index) => {
+    const[ascendente, setAscendente] = useState(false)
+    const movementosOrdenados = [...historial]
+    function ordenarLista(){
+
+      
+        setAscendente(!ascendente)
+        setMovementos([...movementosOrdenados].reverse());
+
+    
+      
+    }
+
+  
+     setMovementos(historial.map((cadrados, index) => {
       return (
           <li key={index}>
             {movementoActual === index ? <div> Estás en el movimiento {movementoActual +1}
@@ -47,29 +58,15 @@ export default function Xogo(){
         </li>
 
       )
-    })
+    }))
 
-    const[ascendente, setAscendente] = useState(false)
-    const movementosOrdenados = [...movementos]
-    function ordenarLista(){
-      if(ascendente === false){
-        setAscendente(true)
-        return movementos = movementosOrdenados.sort()
-
-      } else {
-        setAscendente(false)
-        return movementos =  movementosOrdenados.reverse()
-
-
-      }
-      
-    }
+   
 
 
     return (
       <div className="game">
         <div className="game-board">
-          {console.log(cadradosActuais)}
+          
             <Taboleiro xTurno={xTurno} cadrados={cadradosActuais} onXogar={handleXogo}></Taboleiro>
         </div>
       <div className="game-info">
@@ -78,6 +75,8 @@ export default function Xogo(){
         <ol>
           {movementos}
         </ol>
+        <button onClick={() => ordenarLista}>{ascendente ? "Pulsa para ascender" : "Pulsa para descender"}</button>
+        
         
         </div>
 
