@@ -8,7 +8,7 @@ export default function Xogo(){
     const [movementoActual, setMovementoActual] = useState(0);
     const xTurno = movementoActual % 2 === 0;
     const cadradosActuais= historial[movementoActual];
-    const [movementos, setMovementos] = useState([Array(9).fill(null)])
+   
 
     function handleXogo(novosCadrados){
 
@@ -32,14 +32,14 @@ export default function Xogo(){
 
       
         setAscendente(!ascendente)
-        setMovementos([...movementosOrdenados].reverse());
+        setMovementos(movementosOrdenados.reverse()); //setHistorial
 
     
       
     }
 
   
-     setMovementos(historial.map((cadrados, index) => {
+     const movementos=historial.map((cadrados, index) => {
       return (
           <li key={index}>
             {movementoActual === index ? <div> Estás en el movimiento {movementoActual +1}
@@ -58,7 +58,7 @@ export default function Xogo(){
         </li>
 
       )
-    }))
+    })
 
    
 
