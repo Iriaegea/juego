@@ -32,7 +32,7 @@ export default function Xogo(){
 
       
         setAscendente(!ascendente)
-        setMovementos(movementosOrdenados.reverse()); //setHistorial
+        setHistorial(movementosOrdenados.reverse()); 
 
     
       
